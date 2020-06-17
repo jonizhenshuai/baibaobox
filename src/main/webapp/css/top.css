@@ -1,0 +1,31 @@
+body{
+    background-color: #423841;
+}
+
+
+/*右侧图标*/
+/*用户信息*/
+.portrait{
+    margin: 2px;
+    /*background-color: red;*/
+    float: right;
+    width: 40px;
+    height: 40px;
+    /*background: url('/images/icon/portrait.png') no-repeat;*/
+}
+
+.username{
+    margin: 7px;
+    width: 100px;
+    float: right;
+    overflow: hidden;
+}
+
+/*字体变化*/
+a{
+    color: #959194;
+    font-size: 16px;
+}
+a:hover{
+    color: red;
+}

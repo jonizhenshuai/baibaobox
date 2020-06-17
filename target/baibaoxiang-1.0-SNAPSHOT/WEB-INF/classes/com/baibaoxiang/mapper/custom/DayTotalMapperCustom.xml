@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baibaoxiang.mapper.custom.DayTotalMapperCustom">
+    <resultMap id="BaseResultMap" type="com.baibaoxiang.po.ReadLikeNumber" >
+        <result column="read_num" property="readNum" jdbcType="INTEGER" />
+        <result column="like_num" property="likeNum" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    read_num, like_num
+    </sql>
+
+    <select id="dayTotal" resultMap="BaseResultMap" >
+        SELECT SUM(day_read_num) AS read_num, SUM(day_like_num) AS like_num FROM day_total WHERE time = #{time,jdbcType=DATE}
+    </select>
+
+    <select id="dayTotalArea" resultMap="BaseResultMap" >
+        SELECT SUM(day_read_num) AS read_num, SUM(day_like_num) AS like_num FROM article JOIN day_total ON article.no = day_total.no AND time = #{time,jdbcType=DATE} AND area = #{area,jdbcType=VARCHAR}
+    </select>
+
+    <select id="dayTotalType" resultMap="BaseResultMap" >
+        SELECT SUM(day_read_num) AS read_num, SUM(day_like_num) AS like_num FROM article JOIN day_total ON article.no = day_total.no AND time = #{time,jdbcType=DATE} AND type = #{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="dayTotalTypeArea" resultMap="BaseResultMap" >
+        SELECT SUM(day_read_num) AS read_num, SUM(day_like_num) AS like_num FROM article JOIN day_total ON article.no = day_total.no AND time = #{time,jdbcType=DATE} AND area = #{area,jdbcType=VARCHAR} AND type = #{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="dayTotalNo" resultMap="BaseResultMap" >
+        SELECT day_read_num AS read_num, day_like_num AS like_num FROM day_total WHERE no = #{no,jdbcType=VARCHAR} AND time = #{time,jdbcType=DATE}
+    </select>
+
+    <update id="updateReadNum" >
+        UPDATE day_total SET day_read_num = day_read_num + #{num,jdbcType=INTEGER} where no = #{no,jdbcType=VARCHAR} and time = #{time,jdbcType=DATE}
+    </update>
+
+    <update id="updateLikeNum" >
+        UPDATE day_total SET day_like_num = day_like_num + #{num,jdbcType=INTEGER} WHERE no = #{no,jdbcType=VARCHAR} AND time = #{time,jdbcType=DATE}
+    </update>
+
+    <select id="dayTotalNos" resultType="java.lang.Integer" >
+        SELECT day_read_num FROM day_total WHERE no = #{no,jdbcType=VARCHAR} AND time = #{time,jdbcType=DATE}
+    </select>
+
+    <delete id="deleteDayTotalByTime" parameterType="java.sql.Date">
+        DELETE FROM day_total WHERE time = #{time,jdbcType=DATE}
+    </delete>
+
+</mapper>

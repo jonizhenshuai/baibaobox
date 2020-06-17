@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baibaoxiang.mapper.custom.AreaMapperCustom">
+    <resultMap id="BaseResultMap" type="com.baibaoxiang.po.Area">
+        <id column="no" jdbcType="INTEGER" property="no" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <association column="schoolNo"  property="school"
+                     select="com.baibaoxiang.mapper.SchoolMapper.selectByPrimaryKey">
+        </association>
+    </resultMap>
+
+    <insert id="insertArea" >
+        INSERT INTO area(no,schoolNo,name) VALUES (#{no,jdbcType=INTEGER},#{schoolNo,jdbcType=INTEGER},#{name,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="findAllAreas" resultMap="BaseResultMap">
+        SELECT * FROM area
+    </select>
+
+    <select id="findAreaBySchoolName" resultMap="BaseResultMap">
+        SELECT * FROM area JOIN school ON area.schoolNo = school.no WHERE school.name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findMaxAreaNo" resultType="java.lang.Integer">
+        SELECT no FROM area ORDER BY no DESC LIMIT 1
+    </select>
+</mapper>

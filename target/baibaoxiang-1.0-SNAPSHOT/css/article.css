@@ -1,0 +1,81 @@
+body{
+    background-color: #f5f5f5;
+}
+.container{
+    margin: 50px;
+}
+li{
+    list-style: none;
+}
+
+/*新建推文a标签*/
+.top a{
+    text-decoration: none;
+    text-align: center;
+    color: #defffa;
+    background-color: #37b7b0;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#classification{
+    font-size: 20px;
+}
+
+/*搜索栏*/
+#search{
+    margin-left: 25px;
+
+}
+
+/*底部点赞数阅读数所在的空间*/
+.panel-footer{
+    height: 50px;
+}
+.manage{
+    display: inline-block;
+    float: right;
+}
+.manage .delete{
+    /*margin-right: 3px;*/
+    /*background-color: red;*/
+    float: right;
+    width: 32px;
+    height: 32px;
+    background-image: url('/images/icon/delete.png');
+    background-repeat: no-repeat;
+}
+.manage .edit{
+    /*background-color: red;*/
+    margin-right: 10px;
+    float: right;
+    width: 32px;
+    height: 32px;
+    background-image: url('/images/icon/edit.png');
+    background-repeat:no-repeat;
+}
+.manage .up{
+    margin-right: 10px;
+    float: right;
+    height: 32px;
+}
+
+.new{
+    text-decoration: none;
+    text-align: center;
+    color: #defffa;
+    background-color: #37b7b0;
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 5px;
+}
+.del{
+    text-decoration: none;
+    text-align: center;
+    color: #defffa;
+    background-color: #b74526;
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 5px;
+}

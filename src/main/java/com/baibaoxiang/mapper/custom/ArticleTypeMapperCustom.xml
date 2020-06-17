@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baibaoxiang.mapper.custom.ArticleTypeMapperCustom">
+    <resultMap id="BaseResultMap" type="com.baibaoxiang.po.ArticleType" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="sequence_num" property="sequenceNum" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, sequence_num, type
+    </sql>
+
+    <select id="selectArticleTypes" resultMap="BaseResultMap">
+        SELECT * FROM article_type
+    </select>
+
+    <select id="selectArticleTypesSelective" resultMap="BaseResultMap">
+        SELECT * FROM article_type WHERE type != '推荐'
+    </select>
+
+    <select id="selectArticleTypeByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM article_type WHERE type =#{type}
+    </select>
+
+    <delete id="deleteByType" parameterType="java.lang.String" >
+        DELETE FROM article_type WHERE type = #{type}
+    </delete>
+
+    <update id="updateSequenceNumByAddOne" parameterType="java.lang.Integer">
+        UPDATE article_type SET sequence_num = sequence_num + 1 WHERE sequence_num &lt; #{oldSequenceNum,jdbcType=INTEGER} AND sequence_num &gt;= #{newSequenceNum,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateSequenceNumBySubOne" parameterType="java.lang.Integer">
+        UPDATE article_type SET sequence_num = sequence_num - 1 WHERE sequence_num &gt; #{oldSequenceNum,jdbcType=INTEGER} AND sequence_num &lt;= #{newSequenceNum,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateSequenceNumById" parameterType="java.lang.Integer">
+        UPDATE article_type SET sequence_num = #{newSequenceNum,jdbcType=INTEGER} WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findMaxSequence" resultType="java.lang.Integer">
+        SELECT sequence_num+1 FROM article_type ORDER BY sequence_num desc LIMIT 1
+    </select>
+</mapper>

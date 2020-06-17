@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baibaoxiang.mapper.DayTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.baibaoxiang.po.DayTotal" >
+    <id column="no" property="no" jdbcType="VARCHAR" />
+    <id column="time" property="time" jdbcType="DATE" />
+    <result column="day_read_num" property="dayReadNum" jdbcType="INTEGER" />
+    <result column="day_like_num" property="dayLikeNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    no, time, day_read_num, day_like_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baibaoxiang.po.DayTotalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from day_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.baibaoxiang.po.DayTotalKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from day_total
+    where no = #{no,jdbcType=VARCHAR}
+      and time = #{time,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.baibaoxiang.po.DayTotalKey" >
+    delete from day_total
+    where no = #{no,jdbcType=VARCHAR}
+      and time = #{time,jdbcType=DATE}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.baibaoxiang.po.DayTotalExample" >
+    delete from day_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.baibaoxiang.po.DayTotal" >
+    insert into day_total (no, time, day_read_num, 
+      day_like_num)
+    values (#{no,jdbcType=VARCHAR}, #{time,jdbcType=DATE}, #{dayReadNum,jdbcType=INTEGER}, 
+      #{dayLikeNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baibaoxiang.po.DayTotal" >
+    insert into day_total
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="dayReadNum != null" >
+        day_read_num,
+      </if>
+      <if test="dayLikeNum != null" >
+        day_like_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="dayReadNum != null" >
+        #{dayReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="dayLikeNum != null" >
+        #{dayLikeNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.baibaoxiang.po.DayTotalExample" resultType="java.lang.Integer" >
+    select count(*) from day_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update day_total
+    <set >
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=DATE},
+      </if>
+      <if test="record.dayReadNum != null" >
+        day_read_num = #{record.dayReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dayLikeNum != null" >
+        day_like_num = #{record.dayLikeNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update day_total
+    set no = #{record.no,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=DATE},
+      day_read_num = #{record.dayReadNum,jdbcType=INTEGER},
+      day_like_num = #{record.dayLikeNum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baibaoxiang.po.DayTotal" >
+    update day_total
+    <set >
+      <if test="dayReadNum != null" >
+        day_read_num = #{dayReadNum,jdbcType=INTEGER},
+      </if>
+      <if test="dayLikeNum != null" >
+        day_like_num = #{dayLikeNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where no = #{no,jdbcType=VARCHAR}
+      and time = #{time,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baibaoxiang.po.DayTotal" >
+    update day_total
+    set day_read_num = #{dayReadNum,jdbcType=INTEGER},
+      day_like_num = #{dayLikeNum,jdbcType=INTEGER}
+    where no = #{no,jdbcType=VARCHAR}
+      and time = #{time,jdbcType=DATE}
+  </update>
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baibaoxiang.mapper.custom.ArticleMapperCustom">
+
+    <resultMap id="BaseResultMap" type="com.baibaoxiang.po.Article" >
+        <id column="no" jdbcType="VARCHAR" property="no" />
+        <result column="read_num" jdbcType="INTEGER" property="readNum" />
+        <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="create_time" jdbcType="DATE" property="createTime" />
+        <result column="top" jdbcType="INTEGER" property="top" />
+        <result column="picture_path" jdbcType="VARCHAR" property="picturePath" />
+        <association column="typeNo"  property="articleType"
+                     select="com.baibaoxiang.mapper.ArticleTypeMapper.selectByPrimaryKey">
+        </association>
+        <association column="author"  property="manager"
+                     select="com.baibaoxiang.mapper.ManagerMapper.selectByPrimaryKey">
+        </association>
+        <association column="areaNo"  property="area"
+                     select="com.baibaoxiang.mapper.AreaMapper.selectByPrimaryKey">
+        </association>
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.baibaoxiang.po.Article" extends="BaseResultMap" >
+        <result column="message" property="message" jdbcType="LONGVARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        no, author, typeNo, areaNo, read_num, like_num, title, create_time, top, picture_path
+    </sql>
+    <sql id="Blob_Column_List" >
+      message
+    </sql>
+
+    <!-- 类型/地区 置顶/发布时间 查询-->
+    <select id="selectByTypeArea" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List"/> FROM article WHERE typeNo = #{typeNo} AND areaNo = #{areaNo}  ORDER BY top ASC,create_time DESC
+    </select>
+
+    <!-- 查询所有的推文 置顶/发布时间 排序-->
+    <select id="selectAllArticles" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List"/> FROM article ORDER BY top ASC,create_time DESC
+    </select>
+
+    <!-- 查询某类型的所有推文  置顶/发布时间 排序-->
+    <select id="selectByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM article WHERE typeNo = #{typeNo} ORDER BY top ASC,create_time DESC
+    </select>
+
+    <!-- 通过 创建的时间段 找出批量文章的编号-->
+    <select id="selectNoByCreateTime" parameterType="java.sql.Date" resultType="java.lang.String" >
+        SELECT no FROM article WHERE create_time BETWEEN #{startTime,jdbcType=DATE} AND #{endTime,jdbcType=DATE}
+    </select>
+
+    <!-- 更新阅读量-->
+    <update id="updateReadNum" >
+        UPDATE article SET read_num = read_num + #{readNum,jdbcType=INTEGER} WHERE no = #{no,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 更新点赞量-->
+    <update id="updateLikeNum" >
+        UPDATE article SET like_num = like_num + #{likeNum,jdbcType=INTEGER} WHERE no = #{no,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 同时更新阅读量 和 点赞量-->
+    <update id="updateReadLikeNum">
+        UPDATE article SET read_num = read_rum + #{readNum,jdbcType=INTEGER} , like_num = like_num + #{likeNum,jdbcType=INTEGER} WHERE no = #{no,jdbcType=VARCHAR}
+    </update>
+
+    <!--设置置顶-->
+    <update id="setTopArticle" >
+        UPDATE article SET top = #{top,jdbcType=INTEGER} WHERE no = #{no,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,13 @@
+.firstTd p span {
+    font-size: 0.8rem;
+}
+
+.firstTd p {
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.table td {
+    padding-top: 0.24rem;
+}

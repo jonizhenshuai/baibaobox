@@ -1,0 +1,15 @@
+body{
+    padding-top: 100px;
+}
+.all{
+    margin: 0 auto;
+    width: 60%;
+    height: 400px;
+    /*background-color: red;*/
+    text-align: center;
+    padding: 5px;
+}
+table{
+    text-align: left;
+    border:#423841 solid 0.5px;
+}

@@ -1,0 +1,37 @@
+h5 {
+    font-size: 1.1rem;
+}
+
+#back-to-top.show {
+    opacity: 0.7;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 30px;
+    background: #343a40;
+    color: #f5f5f5;
+    cursor: pointer;
+    border-radius: 50px;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+    border: 1px solid #343a40;
+}
+#mess img{
+    width: 1rem;
+    height: 1rem;
+}
+#mess span{
+    font-size: 0.8rem;
+}
+#mess{
+    text-align: center;
+    margin: 0.4rem;
+}

@@ -1,0 +1,59 @@
+.rounded {
+    width: 6rem;
+    height: 4.8rem;
+}
+
+table td {
+    font-size: 1rem;
+}
+
+table td span {
+    font-size: 1rem;
+    color: #707070;
+}
+.Title{
+    height: 3.3rem;
+    margin-top: 0.1rem;
+}
+.littleIcon{
+    margin-bottom: 0.15rem;
+}
+.table td{
+    padding: 0.55rem;
+    padding-bottom: 0.2rem;
+}
+div{
+    color: #4f4f4f;
+}
+.navbar-toggler{
+    padding: 0;
+    border: 0;
+}
+nav img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.custom-select{
+    padding: 0;
+    height: 2rem;
+}
+#area{
+    width: 50%;
+    margin-left: 2rem;
+}
+#school{
+    width: 70%;
+    margin-left: 2rem;
+}
+#chooseSchool{
+    background-color: #343a40;
+    height: 32%;
+    width: 100%;
+    opacity: 0.9;
+    display: none;
+}
+#chooseSchool span{
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding-left: 1rem;
+}

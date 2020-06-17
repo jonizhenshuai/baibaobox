@@ -1,0 +1,19 @@
+body{
+    background-color: #423841;
+}
+
+a{
+    color: #737989;
+}
+li:hover{
+    font-color: #e6e9f2;
+}
+/*内容样式*/
+.content{
+    padding: 12px;
+}
+.page-header {
+    text-align: center;
+    color: #5bc0de;
+}
+

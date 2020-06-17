@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+img{
+    max-width: 150px;
+    max-height: 150px;
+}
+div p{
+    text-align: left;
+}
+.information{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    /*border:1px solid;*/
+}
+#path{
+    margin: 0 auto;
+}
